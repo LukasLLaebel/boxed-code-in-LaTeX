@@ -7,7 +7,7 @@
 - Quick installation with `.sty` file
 
 ## Installation
-> Copy blockcoding.sty to your local LaTeX directory (make one if missing!). (For MiKTeX: *_C:\Users\Username\AppData\Local\Programs\MiKTeX\tex\latex\local\_*)
+> Copy blockcoding.sty to your local LaTeX directory (make one if missing!). (For MiKTeX: *C:\Users\Username\AppData\Local\Programs\MiKTeX\tex\latex\local\*)
 and
 > Open MiKTeX Console → Tasks → Refresh File Name Database.
 
