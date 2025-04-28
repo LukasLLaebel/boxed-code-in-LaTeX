@@ -1,0 +1,236 @@
+%% blockcoding.sty - Custom LaTeX package by Lukas Leander Læbel
+%%
+%% This package provides personal formatting and command settings for code blocks using listings.
+%% License: LaTeX Project Public License (LPPL)
+%% See: http://www.latex-project.org/lppl.txt
+%%
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{blockcoding}[2025/04/25 v0.01 My personal LaTeX package]
+
+% Required packages
+\RequirePackage{listings}
+\RequirePackage{listingsutf8}
+\RequirePackage{xcolor} % for color definitions
+
+% Default colors
+\definecolor{codebg}{RGB}{30,30,30} 			% Black background
+\definecolor{codefg}{RGB}{240,240,240}
+\definecolor{stringcolor}{RGB}{80,200,120}
+\definecolor{commentcolor}{RGB}{130,130,130}
+\definecolor{keywordcolor}{RGB}{255,130,80}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+
+% Define JavaScript language
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, switch, var, let, const, if, in, while, do, else, case, break, for},
+  keywordstyle=\color{keywordcolor}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{commentcolor}\bfseries,
+  identifierstyle=\color{codefg},
+  sensitive=true,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{commentcolor}\itshape,
+  stringstyle=\color{stringcolor},
+  morestring=[b]',
+  morestring=[b]"
+}
+
+% Python style
+\lstdefinestyle{py}{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small\color{codefg},
+  keywordstyle=\color{keywordcolor}\bfseries,   % normal keywords
+  stringstyle=\color{stringcolor},
+  commentstyle=\color{commentcolor}\itshape,
+  numberstyle=\tiny\color{gray},
+  numbers=left,
+  numbersep=10pt,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  language=Python
+}
+
+% Java style
+\definecolor{java-codebg}{RGB}{30,30,30} 			% Black background
+\definecolor{java-codefg}{RGB}{240,240,240}
+\definecolor{java-stringcolor}{RGB}{255,217,102}
+\definecolor{java-commentcolor}{RGB}{130,130,130}
+\definecolor{java-keywordcolor}{RGB}{200,38,38}
+
+\lstdefinestyle{java}{
+  backgroundcolor=\color{java-codebg},
+  basicstyle=\ttfamily\small\color{java-codefg},
+  keywordstyle=\color{java-keywordcolor}\bfseries,
+  stringstyle=\color{java-stringcolor},
+  commentstyle=\color{java-commentcolor}\itshape,
+  numberstyle=\tiny\color{gray},
+  numbers=left,
+  numbersep=10pt,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  language=Java
+}
+
+% JavaScript style
+\lstdefinestyle{js}{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small\color{codefg},
+  keywordstyle=\color{keywordcolor}\bfseries,
+  stringstyle=\color{stringcolor},
+  commentstyle=\color{commentcolor}\itshape,
+  numberstyle=\tiny\color{gray},
+  numbers=left,
+  numbersep=10pt,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  language=JavaScript
+}
+
+% C style
+\definecolor{C-codebg}{rgb}{0.95, 0.95, 0.95}
+\definecolor{C-codefg}{rgb}{0.1, 0.1, 0.1}
+\definecolor{C-keywordcolor}{rgb}{0, 0, 0.7}
+\definecolor{C-commentcolor}{rgb}{0, 0.5, 0}
+\definecolor{C-stringcolor}{rgb}{0.5, 0, 0}
+
+
+\lstdefinestyle{c}{
+  backgroundcolor=\color{C-codebg},
+  basicstyle=\ttfamily\small\color{C-codefg},
+  keywordstyle=\color{C-keywordcolor}\bfseries,
+  stringstyle=\color{C-stringcolor},
+  commentstyle=\color{C-commentcolor}\itshape,
+  numberstyle=\tiny\color{gray},
+  numbers=left,
+  numbersep=10pt,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  language=C
+}
+
+% C++ style
+\definecolor{cpp-codebg}{rgb}{0.95, 0.95, 0.95}
+\definecolor{cpp-codefg}{rgb}{0.1, 0.1, 0.1}
+\definecolor{cpp-keywordcolor}{rgb}{0, 0, 0.7}
+\definecolor{cpp-commentcolor}{rgb}{0, 0.5, 0}
+\definecolor{cpp-stringcolor}{rgb}{0.5, 0, 0}
+
+
+\lstdefinestyle{cpp}{
+  backgroundcolor=\color{cpp-codebg},
+  basicstyle=\ttfamily\small\color{cpp-codefg},
+  keywordstyle=\color{cpp-keywordcolor}\bfseries,
+  stringstyle=\color{cpp-stringcolor},
+  commentstyle=\color{cpp-commentcolor}\itshape,
+  numberstyle=\tiny\color{gray},
+  numbers=left,
+  numbersep=10pt,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  language=C++
+}
+
+% C# style
+\definecolor{csharp-codebg}{rgb}{0.95, 0.95, 0.95}
+\definecolor{csharp-codefg}{rgb}{0.1, 0.1, 0.1}
+\definecolor{csharp-keywordcolor}{rgb}{0, 0, 0.7}
+\definecolor{csharp-commentcolor}{rgb}{0, 0.5, 0}
+\definecolor{csharp-stringcolor}{rgb}{0.5, 0, 0}
+
+\lstdefinestyle{csharp}{
+  backgroundcolor=\color{csharp-codebg},
+  basicstyle=\ttfamily\small\color{csharp-codefg},
+  keywordstyle=\color{csharp-keywordcolor}\bfseries,
+  stringstyle=\color{csharp-stringcolor},
+  commentstyle=\color{csharp-commentcolor}\itshape,
+  numberstyle=\tiny\color{gray},
+  numbers=left,
+  numbersep=10pt,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  language=[Sharp]C
+}
+
+\lstdefinestyle{sql}{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small\color{codefg},
+  keywordstyle=\color{keywordcolor}\bfseries,   % normal keywords
+  stringstyle=\color{stringcolor},
+  commentstyle=\color{commentcolor}\itshape,
+  numberstyle=\tiny\color{gray},
+  numbers=left,
+  numbersep=10pt,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  language=SQL
+}
+
+
+
+
+% Default listing style (can be changed)
+\lstset{style=py}
+
+% Environment for inline source code with selectable style
+\lstnewenvironment{sourcecode}[1][]{
+  \lstset{style=#1}
+}{}
+
+% Optional custom command for external code files
+%\newcommand{\codeblock}[2]{%
+  %\lstset{style=#1}%
+  %\lstinputlisting{#2}%
+%}
+
+
+\endinput
+%%
+%% End of file blockcoding.sty
+
+
+
+
+
+% Example source code blocks
+%
+%%  \begin{sourcecode}[py]
+%%  # A sample Python function
+%%  def greet(name):
+%%      print(f"Hello, {name}!")
+%%  
+%%  greet("Lukas")
+%%  \end{sourcecode}
+
+%%  \begin{sourcecode}[java]
+%%  // Example of a Java class
+%%  public class HelloWorld {
+%%      public static void main(String[] args) {
+%%          // Print a greeting
+%%          System.out.println("Hello, World!");
+%%      }
+%%  }
+%%  \end{sourcecode}
+%
+%
