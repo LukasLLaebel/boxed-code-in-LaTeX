@@ -11,6 +11,7 @@
 \RequirePackage{listings}
 \RequirePackage{listingsutf8}
 \RequirePackage{xcolor} % for color definitions
+\RequirePackage{float}  % Add this for [H] placement
 
 % Default colors
 \definecolor{codebg}{RGB}{30,30,30} 			% Black background
@@ -36,11 +37,57 @@
   morestring=[b]"
 }
 
+\lstdefinelanguage{grid-file}{
+  keywords={r},
+  keywordstyle=\color{grid-road}\bfseries,
+  ndkeywords={o},
+  ndkeywordstyle=\color{grid-object}\bfseries,
+  morekeywords=[2]{n,k},
+  keywordstyle=[2]\color{grid-ev}\bfseries,
+  morekeywords=[3]{h},
+  keywordstyle=[3]\color{grid-handicap}\bfseries,
+  morekeywords=[4]{s,m,l},
+  keywordstyle=[4]\color{grid-bay}\bfseries,
+  sensitive=true,
+  morecomment=[l]{\%},
+  commentstyle=\color{commentcolor}\itshape
+}
+
+% Define mtest C framework language with highlighted functions and macros
+\lstdefinelanguage{mtest-C}{
+  keywords={void, int, char, float, double, return, if, else, for, while, do, switch, case, break, struct, typedef, unsigned, signed, const, static, extern},
+  keywordstyle=\color{C-keywordcolor}\bfseries,
+  % Test Case Definition - Vibrant Purple
+  ndkeywords={TEST_CASE, MAIN_RUN_TESTS},
+  ndkeywordstyle=\color{mtestapi-primary}\bfseries,
+  % Core assertion and check macros - Vibrant Teal/Turquoise
+  morekeywords=[2]{CHECK, CHECK_, REQUIRE, REQUIRE_, MESSAGE, MESSAGE_, CHECK_FAIL, REQUIRE_FAIL, CHECK_TRUE, CHECK_FALSE, REQUIRE_TRUE, REQUIRE_FALSE},
+  keywordstyle=[2]\color{mtestapi-secondary}\bfseries,
+  % Integer comparison macros - Vibrant Lime Green
+  morekeywords=[3]{CHECK_EQ_INT, CHECK_NE_INT, CHECK_LT_INT, CHECK_GT_INT, CHECK_LE_INT, CHECK_GE_INT, REQUIRE_EQ_INT, REQUIRE_NE_INT, REQUIRE_LT_INT, REQUIRE_GT_INT, REQUIRE_LE_INT, REQUIRE_GE_INT, TRUE, FALSE},
+  keywordstyle=[3]\color{mtestapi-tertiary}\bfseries,
+  % Double/Float comparison macros - Vibrant Gold/Yellow
+  morekeywords=[4]{CHECK_EQ_DOUBLE, CHECK_NE_DOUBLE, CHECK_LT_DOUBLE, CHECK_GT_DOUBLE, CHECK_LE_DOUBLE, CHECK_GE_DOUBLE, REQUIRE_EQ_DOUBLE, REQUIRE_NE_DOUBLE, REQUIRE_LT_DOUBLE, REQUIRE_GT_DOUBLE, REQUIRE_LE_DOUBLE, REQUIRE_GE_DOUBLE},
+  keywordstyle=[4]\color{mtestapi-quaternary}\bfseries,
+  % Character and String comparison macros - Vibrant Coral/Red
+  morekeywords=[5]{CHECK_EQ_CHAR, CHECK_NE_CHAR, REQUIRE_EQ_CHAR, REQUIRE_NE_CHAR, CHECK_EQ_STRING, CHECK_NE_STRING, REQUIRE_EQ_STRING, REQUIRE_NE_STRING},
+  keywordstyle=[5]\color{mtestapi-quinary}\bfseries,
+  % Utility macros - Vibrant Orange
+  morekeywords=[6]{RUN_TESTS},
+  keywordstyle=[6]\color{mtestapi-senary}\bfseries,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{C-commentcolor}\itshape,
+  stringstyle=\color{C-stringcolor},
+  sensitive=true,
+  identifierstyle=\color{C-codefg}
+}
+
 % Python style
 \lstdefinestyle{py}{
   backgroundcolor=\color{codebg},
   basicstyle=\ttfamily\small\color{codefg},
-  keywordstyle=\color{keywordcolor}\bfseries,   % normal keywords
+  keywordstyle=\color{keywordcolor}\bfseries,
   stringstyle=\color{stringcolor},
   commentstyle=\color{commentcolor}\itshape,
   numberstyle=\tiny\color{gray},
@@ -103,7 +150,6 @@
 \definecolor{C-commentcolor}{rgb}{0, 0.5, 0}
 \definecolor{C-stringcolor}{rgb}{0.5, 0, 0}
 
-
 \lstdefinestyle{c}{
   backgroundcolor=\color{C-codebg},
   basicstyle=\ttfamily\small\color{C-codefg},
@@ -118,7 +164,65 @@
   showstringspaces=false,
   breaklines=true,
   frame=single,
-  language=C
+  language=C,
+  literate={\%}{{{\%}}}1
+}
+
+% Grid file character colors
+\definecolor{grid-road}{RGB}{80, 80, 80}        % Dark gray - Roads (r)
+\definecolor{grid-object}{RGB}{139, 0, 0}       % Red - Objects (o)
+\definecolor{grid-ev}{RGB}{184, 134, 11}        % Dark yellow - EV (n, k)
+\definecolor{grid-handicap}{RGB}{0, 123, 255}   % Blue - Handicap (h)
+\definecolor{grid-bay}{RGB}{34, 139, 34}        % Dark green - Bays (s, m, l)
+
+
+\lstdefinestyle{grid}{
+  backgroundcolor=\color{C-codebg},
+  basicstyle=\ttfamily\small\color{C-codefg},
+  numberstyle=\tiny\color{gray},
+  numbers=left,
+  numbersep=10pt,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  language=grid-file,
+  literate={\%}{{{\%}}}1
+}
+
+% mtest - Minimalist C Unit Testing Framework style
+\definecolor{mtest-codebg}{rgb}{0.98, 0.97, 0.96}
+\definecolor{mtest-codefg}{rgb}{0.05, 0.05, 0.05}
+\definecolor{mtest-keywordcolor}{rgb}{0.2, 0.2, 0.7}
+\definecolor{mtest-commentcolor}{rgb}{0.4, 0.4, 0.4}
+\definecolor{mtest-stringcolor}{rgb}{0.6, 0.1, 0.1}
+
+% mtest Macro Colors - Fresh and vibrant color palette
+\definecolor{mtestapi-primary}{RGB}{147, 51, 234}      % Vibrant light blue - TEST_CASE & MAIN_RUN_TESTS
+\definecolor{mtestapi-secondary}{RGB}{6, 182, 212}     % Vibrant Teal - CHECK/REQUIRE assertions
+\definecolor{mtestapi-tertiary}{RGB}{199, 60, 0}       % Vibrant DARK Orange - Integer comparisons
+\definecolor{mtestapi-quaternary}{RGB}{251, 191, 36}   % Vibrant Gold/Yellow - Double comparisons
+\definecolor{mtestapi-quinary}{RGB}{239, 68, 68} 
+\definecolor{mtestapi-senary}{RGB}{249, 115, 22} 
+
+\lstdefinestyle{mtest}{
+  backgroundcolor=\color{mtest-codebg},
+  basicstyle=\ttfamily\small\color{mtest-codefg},
+  keywordstyle=\color{mtest-keywordcolor}\bfseries,
+  ndkeywordstyle=\color{mtestapi-primary}\bfseries,
+  stringstyle=\color{C-stringcolor},
+  commentstyle=\color{mtest-commentcolor}\itshape,
+  numberstyle=\tiny\color{gray},
+  numbers=left,
+  numbersep=10pt,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  language=mtest-C,
+  literate={\%}{{{\%}}}1
 }
 
 % C++ style
@@ -127,7 +231,6 @@
 \definecolor{cpp-keywordcolor}{rgb}{0, 0, 0.7}
 \definecolor{cpp-commentcolor}{rgb}{0, 0.5, 0}
 \definecolor{cpp-stringcolor}{rgb}{0.5, 0, 0}
-
 
 \lstdefinestyle{cpp}{
   backgroundcolor=\color{cpp-codebg},
@@ -173,7 +276,7 @@
 \lstdefinestyle{sql}{
   backgroundcolor=\color{codebg},
   basicstyle=\ttfamily\small\color{codefg},
-  keywordstyle=\color{keywordcolor}\bfseries,   % normal keywords
+  keywordstyle=\color{keywordcolor}\bfseries,
   stringstyle=\color{stringcolor},
   commentstyle=\color{commentcolor}\itshape,
   numberstyle=\tiny\color{gray},
@@ -187,6 +290,148 @@
   language=SQL
 }
 
+% Bash colors
+\definecolor{bash-codebg}{RGB}{40,40,40}        % Dark background
+\definecolor{bash-codefg}{RGB}{220,220,220}      % Light foreground
+\definecolor{bash-keywordcolor}{RGB}{255,130,80} % Orange keywords
+\definecolor{bash-commentcolor}{RGB}{130,130,130}% Gray comments
+\definecolor{bash-stringcolor}{RGB}{80,200,120}  % Green strings
+\definecolor{bash-varcolor}{RGB}{100,180,255}    % Blue for variables/builtins
+
+% Define Bash language
+\lstdefinelanguage{Bash}{
+  keywords={if, then, else, elif, fi, for, in, do, done, while, until, case, esac, function, select, time, coproc},
+  keywordstyle=\color{bash-keywordcolor}\bfseries,
+  ndkeywords={echo, printf, read, exit, return, local, export, source, eval, exec, set, unset, shift, trap, wait, cd, pwd, test, true, false},
+  ndkeywordstyle=\color{bash-varcolor}\bfseries,
+  sensitive=true,
+  comment=[l]{\#},
+  commentstyle=\color{bash-commentcolor}\itshape,
+  stringstyle=\color{bash-stringcolor},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]`,
+  identifierstyle=\color{bash-codefg},
+  literate=
+    {|}{{\textcolor{bash-keywordcolor}{|}}}1
+    {>}{{\textcolor{bash-keywordcolor}{>}}}1
+    {<}{{\textcolor{bash-keywordcolor}{<}}}1
+    {>>}{{\textcolor{bash-keywordcolor}{>>}}}2
+    {&&}{{\textcolor{bash-keywordcolor}{\&\&}}}2
+    {||}{{\textcolor{bash-keywordcolor}{||}}}2
+    {;}{{\textcolor{bash-keywordcolor}{;}}}1
+}
+
+% Bash style
+\lstdefinestyle{bash}{
+  backgroundcolor=\color{bash-codebg},
+  basicstyle=\ttfamily\small\color{bash-codefg},
+  keywordstyle=\color{bash-keywordcolor}\bfseries,
+  stringstyle=\color{bash-stringcolor},
+  commentstyle=\color{bash-commentcolor}\itshape,
+  numberstyle=\tiny\color{gray},
+  numbers=left,
+  numbersep=10pt,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  language=Bash
+}
+
+% HTML colors
+\definecolor{html-codebg}{RGB}{30,30,30}        
+\definecolor{html-codefg}{RGB}{240,240,240}
+\definecolor{html-keywordcolor}{RGB}{255,130,80}
+\definecolor{html-commentcolor}{RGB}{130,130,130}
+\definecolor{html-stringcolor}{RGB}{80,200,120} 
+\definecolor{html-attrcolor}{RGB}{100,180,255}  
+
+% Define HTML language
+\lstdefinelanguage{HTML}{
+  keywords={html, head, body, title, meta, link, script, style, div, span, p, a, img, form, input, button, ul, ol, li, table, tr, td, th, header, footer, nav, section, article, aside},
+  keywordstyle=\color{html-keywordcolor}\bfseries,
+  ndkeywords={class, id, href, src, alt, type, name, value, placeholder, disabled, required, onclick},
+  ndkeywordstyle=\color{html-attrcolor}\bfseries,
+  sensitive=true,
+  comment=[s]{<!--}{-->},
+  commentstyle=\color{html-commentcolor}\itshape,
+  stringstyle=\color{html-stringcolor},
+  morestring=[b]",
+  morestring=[b]',
+  identifierstyle=\color{html-codefg},
+  literate=
+    {<}{{\textcolor{html-keywordcolor}{<}}}1
+    {>}{{\textcolor{html-keywordcolor}{>}}}1
+    {/}{{\textcolor{html-keywordcolor}{/}}}1
+}
+
+% HTML style
+\lstdefinestyle{html}{
+  backgroundcolor=\color{html-codebg},
+  basicstyle=\ttfamily\small\color{html-codefg},
+  keywordstyle=\color{html-keywordcolor}\bfseries,
+  stringstyle=\color{html-stringcolor},
+  commentstyle=\color{html-commentcolor}\itshape,
+  numberstyle=\tiny\color{gray},
+  numbers=left,
+  numbersep=10pt,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  language=HTML
+}
+
+
+
+
+
+
+% CSS colors
+\definecolor{css-codebg}{RGB}{30,30,30}         % Dark background
+\definecolor{css-codefg}{RGB}{240,240,240}      % Light foreground
+\definecolor{css-selectorcolor}{RGB}{80,200,120}% Green for selectors
+\definecolor{css-commentcolor}{RGB}{130,130,130}% Gray comments
+\definecolor{css-propcolor}{RGB}{100,180,255}   % Blue for properties
+\definecolor{css-valuecolor}{RGB}{255,130,80}   % Orange for values
+
+% Define CSS language
+\lstdefinelanguage{CSS}{
+  morekeywords={color, background, margin, padding, border, font, width, height, display, position, top, left, right, bottom, z-index, opacity, transform, transition, animation, flex, grid, text-align, font-size, line-height, box-sizing, overflow, cursor, visibility, white-space, word-wrap, text-decoration, font-weight, font-family, background-color, border-radius, box-shadow, text-shadow, justify-content, align-items, gap, flex-direction, font-style, letter-spacing, text-transform, background-image, border-color, border-width, border-style, min-width, max-width, min-height, max-height, content},
+  keywordstyle=\color{css-propcolor}\bfseries,
+  sensitive=false,
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{css-commentcolor}\itshape,
+  stringstyle=\color{css-stringcolor},
+  morestring=[b]",
+  morestring=[b]',
+  alsoletter={-},
+    literate={)}{}{1}
+           {:}{{\textcolor{css-codefg}{:}}}1
+           {;}{{\textcolor{css-codefg}{;}}}1
+}
+
+% CSS style with selector highlighting before braces
+\lstdefinestyle{css}{
+  backgroundcolor=\color{css-codebg},
+  basicstyle=\ttfamily\small\color{css-codefg},
+  keywordstyle=\color{css-propcolor}\bfseries,
+  commentstyle=\color{css-commentcolor}\itshape,
+  numberstyle=\tiny\color{gray},
+  numbers=left,
+  numbersep=10pt,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  language=CSS,
+  moredelim=[is][\color{css-selectorcolor}]{\(}{\ \{},
+  moredelim=[is][\color{css-valuecolor}]{:}{;}
+}
 
 
 
@@ -198,39 +443,6 @@
   \lstset{style=#1}
 }{}
 
-% Optional custom command for external code files
-%\newcommand{\codeblock}[2]{%
-  %\lstset{style=#1}%
-  %\lstinputlisting{#2}%
-%}
-
-
 \endinput
 %%
 %% End of file blockcoding.sty
-
-
-
-
-
-% Example source code blocks
-%
-%%  \begin{sourcecode}[py]
-%%  # A sample Python function
-%%  def greet(name):
-%%      print(f"Hello, {name}!")
-%%  
-%%  greet("Lukas")
-%%  \end{sourcecode}
-
-%%  \begin{sourcecode}[java]
-%%  // Example of a Java class
-%%  public class HelloWorld {
-%%      public static void main(String[] args) {
-%%          // Print a greeting
-%%          System.out.println("Hello, World!");
-%%      }
-%%  }
-%%  \end{sourcecode}
-%
-%
