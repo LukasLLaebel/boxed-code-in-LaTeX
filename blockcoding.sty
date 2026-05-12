@@ -20,13 +20,30 @@
 \definecolor{commentcolor}{RGB}{130,130,130}
 \definecolor{keywordcolor}{RGB}{255,130,80}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{operatorcolor}{RGB}{173, 216, 230}
+\definecolor{specialfuncColor}{RGB}{255, 105, 180}
+\definecolor{functionscolor}{RGB}{50, 170, 230}
+\definecolor{commonfuncs}{RGB}{255, 255, 0}
 
 % Define JavaScript language
 \lstdefinelanguage{JavaScript}{
-  keywords={typeof, new, true, false, catch, function, return, null, switch, var, let, const, if, in, while, do, else, case, break, for},
+  keywords={typeof, new, true, false, catch, function, return, null, switch, var, let, const, if, in, while, do, else, case, break, for, get, post, put, delete},
   keywordstyle=\color{keywordcolor}\bfseries,
-  ndkeywords={class, export, boolean, throw, implements, import, this},
-  ndkeywordstyle=\color{commentcolor}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this,async,await},
+  ndkeywordstyle=\color{specialfuncColor}\bfseries,
+  morekeywords=[2]{router},
+  keywordstyle=[2]\color{functionscolor}\bfseries,
+  morekeywords=[3]{%
+    fetch, setTimeout, clearTimeout, setInterval, clearInterval, parseInt, parseFloat, isNaN, isFinite,
+    encodeURIComponent, decodeURIComponent, structuredClone, push, pop, shift, unshift, splice, slice,
+    forEach, map, filter, reduce, reduceRight, flat, flatMap, includes, indexOf, lastIndexOf, find,
+    findIndex, findLast, findLastIndex, some, every, sort, toSorted, reverse, toReversed, join, concat,
+    at, toString, valueOf, toUpperCase, toLowerCase, trim, trimStart, trimEnd, startsWith, endsWith,
+    split, replace, replaceAll, match, matchAll, padStart, padEnd, repeat, charAt, toFixed, toPrecision,
+    Map, Set, set, get, has, delete, clear, keys, values, entries, Promise, then, finally, call, apply,
+    bind, RegExp, test, exec, URL, URLSearchParams, alert, prompt, confirm%
+  },
+  keywordstyle=[3]\color{commonfuncs}\bfseries,
   identifierstyle=\color{codefg},
   sensitive=true,
   comment=[l]{//},
@@ -35,6 +52,44 @@
   stringstyle=\color{stringcolor},
   morestring=[b]',
   morestring=[b]"
+}
+
+% JavaScript style
+\lstdefinestyle{js}{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small\color{codefg},
+  keywordstyle=\color{keywordcolor}\bfseries,
+  keywordstyle=[2]\color{functionscolor}\bfseries,
+  keywordstyle=[3]\color{commonfuncs}\bfseries,
+  stringstyle=\color{stringcolor},
+  commentstyle=\color{commentcolor}\itshape,
+  numberstyle=\tiny\color{gray},
+  numbers=left,
+  numbersep=10pt,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  language=JavaScript,
+  literate=*%
+    % existing operators / punctuation
+    {=>}{{{\color{operatorcolor}{=>}}}}2%
+    {==}{{{\color{operatorcolor}{===}}}}3%
+    {!==}{{{\color{operatorcolor}{!==}}}}3%
+    {===}{{{\color{operatorcolor}{==}}}}2%
+    {!=}{{{\color{operatorcolor}{!=}}}}2%
+    {&&}{{{\color{operatorcolor}{\&\&}}}}2%
+    {||}{{{\color{operatorcolor}{||}}}}2%
+    {.}{{{\color{gray}{.}}}}1%
+    {(}{{{\color{gray}{(}}}}1%
+    {)}{{{\color{gray}{)}}}}1%
+    {[}{{{\color{gray}{[}}}}1%
+    {]}{{{\color{gray}{]}}}}1%
+    {\{}{{{\color{gray}{\{}}}}1%
+    {\}}{{{\color{gray}{\}}}}}1%
+    {,}{{{\color{gray}{,}}}}1%
+    {;}{{{\color{gray}{;}}}}1%
 }
 
 \lstdefinelanguage{grid-file}{
@@ -125,23 +180,8 @@
   language=Java
 }
 
-% JavaScript style
-\lstdefinestyle{js}{
-  backgroundcolor=\color{codebg},
-  basicstyle=\ttfamily\small\color{codefg},
-  keywordstyle=\color{keywordcolor}\bfseries,
-  stringstyle=\color{stringcolor},
-  commentstyle=\color{commentcolor}\itshape,
-  numberstyle=\tiny\color{gray},
-  numbers=left,
-  numbersep=10pt,
-  columns=fullflexible,
-  keepspaces=true,
-  showstringspaces=false,
-  breaklines=true,
-  frame=single,
-  language=JavaScript
-}
+
+
 
 % C style
 \definecolor{C-codebg}{rgb}{0.95, 0.95, 0.95}
