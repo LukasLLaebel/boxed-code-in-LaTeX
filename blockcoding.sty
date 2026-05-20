@@ -9,9 +9,28 @@
 
 % Required packages
 \RequirePackage{listings}
+\RequirePackage{chngcntr}
 \RequirePackage{listingsutf8}
 \RequirePackage{xcolor} % for color definitions
 \RequirePackage{float}  % Add this for [H] placement
+\RequirePackage{caption}
+
+% Rename "Listing"
+\renewcommand{\lstlistingname}{Listing}
+\renewcommand{\lstlistlistingname}{List of Listings}
+
+% Number listings per chapter
+\counterwithin{lstlisting}{chapter}
+
+% Caption styling
+\captionsetup[lstlisting]{
+  font=small,
+  labelfont=bf
+}
+
+
+
+
 
 % Default colors
 \definecolor{codebg}{RGB}{30,30,30} 			% Black background
@@ -24,10 +43,12 @@
 \definecolor{specialfuncColor}{RGB}{255, 105, 180}
 \definecolor{functionscolor}{RGB}{50, 170, 230}
 \definecolor{commonfuncs}{RGB}{255, 255, 0}
+\definecolor{parameterstyle}{RGB}{144, 238, 144}
+\definecolor{classcolor}{RGB}{200, 0, 128}
 
 % Define JavaScript language
 \lstdefinelanguage{JavaScript}{
-  keywords={typeof, new, true, false, catch, function, return, null, switch, if, in, while, do, else, case, break, for, get, post, put, delete, send, /json/, JSON, path, fs, use, body},
+  keywords={typeof, new, true, false, catch, function, return, null, switch, if, in, while, do, else, case, break, for, get, post, put, delete, send, /json/, JSON, path, fs, use, body, undefined, render},
   keywordstyle=\color{keywordcolor}\bfseries,
   morekeywords=[2]{class, boolean, throw, implements, import, this,async,await, const, let, var, expect,from, export},
   keywordstyle=[2]\color{specialfuncColor}\bfseries,
@@ -41,9 +62,17 @@
     at, toString, valueOf, toUpperCase, toLowerCase, trim, trimStart, trimEnd, startsWith, endsWith,
     split, replace, replaceAll, match, matchAll, padStart, padEnd, repeat, charAt, toFixed, toPrecision,
     Map, Set, set, get, has, delete, clear, keys, values, entries, Promise, then, finally, call, apply,
-    bind, RegExp, test, exec, URL, URLSearchParams, alert, prompt, confirm%
+    bind, RegExp, test, exec, URL, URLSearchParams, alert, prompt, confirm, length%
   },
   keywordstyle=[4]\color{commonfuncs}\bfseries,
+  morekeywords=[5]{%
+    folders, searchText, s%
+  },
+  keywordstyle=[5]\color{parameterstyle}\bfseries,
+  morekeywords=[6]{%
+    String%
+  },
+  keywordstyle=[6]\color{classcolor}\bfseries,
   identifierstyle=\color{codefg},
   sensitive=true,
   comment=[l]{//},
@@ -62,6 +91,7 @@
   keywordstyle=[2]\color{specialfuncColor}\bfseries,
   keywordstyle=[3]\color{functionscolor}\bfseries,
   keywordstyle=[4]\color{commonfuncs}\bfseries,
+  keywordstyle=[5]\color{parameterstyle}\bfseries,
   stringstyle=\color{stringcolor},
   commentstyle=\color{commentcolor}\itshape,
   numberstyle=\tiny\color{gray},
@@ -92,6 +122,7 @@
     {,}{{{\color{operatorcolor}{,}}}}1%
     {;}{{{\color{operatorcolor}{;}}}}1%
     {!}{{{\color{operatorcolor}{!}}}}1%
+    {?}{{{\color{operatorcolor}{?}}}}1%
     {:}{{{\color{operatorcolor}{:}}}}1%
     {0}{{{\color{keywordcolor}0}}}1%
     {1}{{{\color{keywordcolor}1}}}1%
@@ -488,12 +519,17 @@
 
 
 
-% Default listing style (can be changed)
-\lstset{style=py}
+% Default listing style
+\lstset{
+  style=py,
+  captionpos=b
+}
 
-% Environment for inline source code with selectable style
 \lstnewenvironment{sourcecode}[1][]{
-  \lstset{style=#1}
+  \lstset{
+    style=#1,
+    captionpos=b
+  }
 }{}
 
 \endinput
